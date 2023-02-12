@@ -1,0 +1,69 @@
+.body{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+h3{
+    color: white;
+    text-align: center;
+}
+
+.input{
+    text-align: center;
+    align-items: center;
+}
+div #title_of_note{
+    text-align: center;
+    height: 30px;
+    padding: none;
+    margin: 10px 0px;
+    max-width: fit-content;
+    border-style:solid
+}
+#freeform{
+    display: flex;
+    width: auto;
+    float:none;
+    width: 80%;
+    max-width: 500px;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0px;
+    border-radius: 10px;
+    align-items: center;
+    min-width: fit-content;
+    padding: 10px
+    
+}
+
+
+#input_box{
+    width: 100%; 
+}
+
+.color{
+    border: none;
+    width: 50px;
+    height: 20px;
+    display: flex;
+    font-style: inherit;
+    flex-direction: row;
+    border-style: none;
+}
+
+div #red{
+    background-color: red;
+    margin-left: 20px;
+    border-radius: 100%;
+}
+
+div #yellow{
+    background-color: yellow;
+    margin-left: 20px;
+    border-radius: 100%;
+}
+
+div #green{
+    margin-left: 20px;
+    border-radius: 100%;
+    background-color: green;
+}

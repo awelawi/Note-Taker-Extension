@@ -67,3 +67,24 @@ div #green{
     border-radius: 100%;
     background-color: green;
 }
+
+.table_of_contents{
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    flex-direction: row;
+    border-collapse: separate;
+}
+
+th{
+    justify-content: center;
+    padding: 69px;
+    border: 1px solid black;
+}
+
+td{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}

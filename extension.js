@@ -89,7 +89,7 @@ function addtoStorage(){
     }
     myNotes.push(NotesInfo)
     window.localStorage.setItem("myNotes", JSON.stringify(myNotes))
-    render(myNotes)
+    // render(myNotes)
     title_of_note.value = "";
     notes_content.value = "";
 }
@@ -102,18 +102,60 @@ if (notesFromLocalStorage) {
     render(myNotes)
 }
 // render should add notes to the table
+var index = 0
 function render (notes) {
+    index += 1
     for(let i = 0; i < notes.length; i++){
-        var newRow = table.insertRow();
-        var tabNameCell = newRow.insertCell();
-        var titleCell = newRow.insertCell();
-        var notesCell = newRow.insertCell();
-        var dateCell = newRow.insertCell();
         var object_test = notes[i]
-        titleCell.textContent = notes[i].titleCell;
-        notesCell.textContent = notes[i].notesCell
-        console.log(notes[i].notesCell)
-        tabNameCell.textContent = notes[i].tabNameCell
-        dateCell.textContent = notes[i].dateCell;
+        console.log(object_test)
+        // Assuming "table" is a reference to the <table> element
+        var newRow = document.createElement("tr");
+
+
+
+        // Create a new cell for the tabs text
+        var tabNameCell = document.createElement("td");
+        var tabNameText = document.createTextNode(object_test.tabNameCell);
+        tabNameCell.appendChild(tabNameText);
+
+        // Create a new cell for the title text
+        var titleCell = document.createElement("td");
+        var titleText = document.createTextNode(object_test.titleCell);
+        titleCell.appendChild(titleText);
+
+        // Create a new cell for the note text
+        var noteCell = document.createElement("td");
+        var noteText = document.createTextNode(object_test.notesCell);
+        noteCell.appendChild(noteText);
+
+        // Create a new cell for the save date
+        var dateCell = document.createElement("td");
+        var dateText = document.createTextNode(object_test.dateCell);
+        dateCell.appendChild(dateText);
+
+        tabNameCell.textContent = object_test.tabNameCell;
+        titleCell.textContent = object_test.titleCell;
+        noteCell.textContent = object_test.notesCell;
+        dateCell.textContent = object_test.dateCell;
+
+        newRow.appendChild(tabNameCell);
+        newRow.appendChild(titleCell);
+        newRow.appendChild(noteCell);
+        newRow.appendChild(dateCell);
+
+        // Append the new row to the table
+        table.appendChild(newRow);
+
+        // var newRow = table.insertRow();
+        // var tabNameCell = newRow.insertCell();
+        // var titleCell = newRow.insertCell();
+        // var notesCell = newRow.insertCell();
+        // var dateCell = newRow.insertCell();
+        // var object_test = notes[i]
+        // titleCell.textContent = notes[i].titleCell;
+        // notesCell.textContent = notes[i].notesCell
+        // console.log(notes[i].notesCell)
+        // tabNameCell.textContent = notes[i].tabNameCell
+        // dateCell.textContent = notes[i].dateCell;
     }
 }

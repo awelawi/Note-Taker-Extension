@@ -10,14 +10,19 @@ const date = new Date();
 myNotes = []
 // Get a reference to the table
 var table = document.querySelector('table');
+var saveButton = colorParent.querySelector("#save")
 
 
+// creates a dictionary for the notes inc title and notes
 var notes_dict = {
     title : "",
     notes : ""
 }
-var saveButton = colorParent.querySelector("#save")
+
+// this event listener listens to click event of the button, and calls the onSaveButtonCClicked
+// method
 saveButton.addEventListener("click", onSaveButtonClicked)
+// this eventlistener listens fior whenever the webpage is resized and adjusts the textboxes and tables
 window.addEventListener("resize", function () {
     document.getElementById("freeform").style.width = (window.innerWidth)/2 + "px";
     document.getElementById("freeform").style.height = (window.innerHeight)/10 + "px";
@@ -73,103 +78,42 @@ function onSaveButtonClicked(){
 
 // add to storage creates an object variable that contains
 // all the notes information
+i = 0
 function addtoStorage(){
     
     const NotesInfo = {
         tabNameCell: tabName,
         titleCell: notes_dict.title,
-        dateCell: date,
-        notesCell: notes_dict.notes
+        notesCell: notes_dict.notes,
+        dateCell: date
     }
-
-    // we have to convert this object to a string for it to be saved in the storage
-    window.localStorage.setItem(myNotes, JSON.stringify(NotesInfo))
-    console.log(window.localStorage.getItem(myNotes))
+    myNotes.push(NotesInfo)
+    window.localStorage.setItem("myNotes", JSON.stringify(myNotes))
     render(myNotes)
     title_of_note.value = "";
     notes_content.value = "";
 }
+
+const notesFromLocalStorage = JSON.parse(window.localStorage.getItem("myNotes"))
+
+if (notesFromLocalStorage) {
+    myNotes = notesFromLocalStorage
+
+    render(myNotes)
+}
+// render should add notes to the table
 function render (notes) {
-    // Create a new row dynamically
-
-    // somehow notes is empty hm
-    console.log(window.localStorage.getItem(notes))
-    console.log(notes.length)
-    // notes is an object string not an array, so it has a length of 0
-    // first we need to convert it back to an object
-    const leadsFromLocalStorage = JSON.parse(localStorage.getItem(notes))
-    console.log(leadsFromLocalStorage)
-    if(leadsFromLocalStorage.length > 0){
-    for(let i = 0; i < leadsFromLocalStorage.length; i++){
+    for(let i = 0; i < notes.length; i++){
         var newRow = table.insertRow();
-
-        // Add cells to the row
         var tabNameCell = newRow.insertCell();
         var titleCell = newRow.insertCell();
-        var dateCell = newRow.insertCell();
         var notesCell = newRow.insertCell();
-        console.log(notes)
-        tabNameCell = leadsFromLocalStorage[i];
-        console.log(tabNameCell)
-        // titleCell = notes[i].titleCell;
-        // dateCell = notes[i].dateCell;
-        // notesCell = notes[i].notesCell
-
+        var dateCell = newRow.insertCell();
+        var object_test = notes[i]
+        titleCell.textContent = notes[i].titleCell;
+        notesCell.textContent = notes[i].notesCell
+        console.log(notes[i].notesCell)
+        tabNameCell.textContent = notes[i].tabNameCell
+        dateCell.textContent = notes[i].dateCell;
     }
-    
-    }
-    // Set the cell values in the object var NotesInfo
-    
-
-    
-    // // sort the rows in descending order based on the date column
-    // var table_size = document.getElementById("table").rows.length;
-
-    // if (table_size > 0){
-    //     var rows = Array.from(document.querySelector("tbody").querySelectorAll("tr"));
-
-    //     rows.sort(function (a, b) {
-    //         if (table_size > 1){
-    //             var dateA = new Date(a.querySelector("#date").textContent);
-    //             var dateB = new Date(b.querySelector("#date").textContent);
-    //             return dateB - dateA;
-
-    //         }
-
-    //         else{
-    //             return
-    //         }
-            
-    //     });
-    //     }
-
-    // // remove all rows from the table body
-    // var tbody = document.querySelector("tbody");
-    // while (tbody.firstChild) {
-    //     tbody.removeChild(tbody.firstChild);
-    // }
-
-    // // insert the sorted rows back into the table body in the correct order
-    // rows.forEach(function (row) {
-    //     tbody.appendChild(row);
-    // });
-
-    // prev code
-    // dateCell.textContent = date;
-    // notesCell.textContent = notes_dict.notes;
-    // notes_dict = {};
-    // title_of_note.value = "";
-    // notes_content.value = "";
-
-    // notes_dict = {};
-    // title_of_note.value = "";
-    // notes_content.value = "";
 }
-
-// write now, I need code that will collect these 
-// items, save it to the local storage, and render it once the table is reloaded
-
-
-
-
-

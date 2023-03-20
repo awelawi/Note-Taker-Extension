@@ -50,6 +50,9 @@ div #title_of_note{
     border-style: none;
 }
 
+div #delete{
+    margin-left: 2px;
+}
 div #red{
     background-color: red;
     margin-left: 20px;

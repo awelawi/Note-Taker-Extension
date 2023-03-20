@@ -11,7 +11,7 @@ const date = new Date();
 myNotes = []
 var table = document.querySelector('table');
 var saveButton = colorParent.querySelector("#save")
-
+var deleteButton = colorParent.querySelector("#delete")
 
 // creates a dictionary for the notes inc title and notes
 var notes_dict = {
@@ -50,11 +50,19 @@ greenButton.addEventListener("click", function(){
 // onSaveButtonClicked is responsible for saving the note title and content whenever entered
 function onSaveButtonClicked(){
     // first check if the title of note or the note space is empty
-    // in the future, we would want this to be highlighted with a prompt that says
-    // one of the input fields is empty
+    // in the future, we would want the input fields that are empty to be temporarily highlighted
     if (title_of_note.value === "" || notes_content.value === "") {
         console.log("One of the input fields is empty, please fill them out")
+        alert("One of the input fields is empty")
         return
+        // if(title_of_note.value === ""){
+        //     title_of_note.style.backgroundColor = "red";
+        // }
+
+        // if(notes_content.value === ""){
+        //     notes_content.style.backgroundColor = "red";
+
+        // }
     }
 
     notes_dict.title = title_of_note.value
@@ -76,13 +84,19 @@ function addtoStorage(){
     notes_content.value = "";
 }
 
+deleteButton.addEventListener("dblclick", function () {
+    localStorage.clear()
+    myLeads = []
+    render(myLeads)
+})
+
 const notesFromLocalStorage = JSON.parse(window.localStorage.getItem("myNotes"))
 if (notesFromLocalStorage) {
     myNotes = notesFromLocalStorage
 
     render(myNotes)
 }
-// render should add notes to the table
+// render should add notes  to the table
 function render (notes) {
     for(let i = 0; i < notes.length; i++){
         var notes_object = notes[i]

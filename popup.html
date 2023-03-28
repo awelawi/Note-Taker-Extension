@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <!-- <div class = "main_content"> -->
         <div class = "header">
         <h3 id = title_of_page style = "color: black;">NOTES TAKER EXTENSION</h3>
         <b><input id = "title_of_note" type="text" placeholder="Title of Note"></b>
@@ -33,7 +34,22 @@
                 <tbody>
                 </tbody>
             </table>
+        <!-- </div> -->
         </div>
+        <!-- this is for the modal dialog box -->
+        <!-- The moda,l dialog box prevents me from typing in text to the text area. I am assuming that even though it's invisible, it's still overlaying the text area. A work around might be to lower it -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                    <P id = "date_of_note">Date: </P>
+                    <p id="note-title">Hello World</p>
+                    <div id = "modal_note">
+                        <p id="note-content">Yes Hello</p>
+                    </div>
+                    
+                    <button id = "close_btn">Close</button>
+            </div>
+        </div>
+
     <script src="extension.js"></script>
     </body>
 </html>

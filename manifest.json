@@ -1,10 +1,11 @@
 {
-    "name": "My Extension",
+    "name": "Notes Taker extension",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": [
         "storage"
     ],
+    "description": "Take Online Notes that are saved with Notes Taker Chrome Extension",
     "content_scripts": [
         {
             "matches": [
@@ -12,7 +13,17 @@
             ],
             "js": [
                 "extension.js"
+            ],
+            "html":[
+                "popup.html"
             ]
         }
-    ]
+    ],
+    "icons":{
+        "16":"notes_img.png",
+        "32": "notes_img.png",
+        "48": "notes_img.png",
+        "128": "notes_img.png"
+    }
 }
+

@@ -91,3 +91,81 @@ td{
     padding: 8px;
     text-align: center;
 }
+
+/* this is the styling for the modal dialog box */
+#modal{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+#modal .modal-content {
+    width: 385px;
+    height: 230px;
+    margin: 100px auto;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 1px solid #666666;
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 15px;
+    border: 3px solid #cccccc;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    overflow: scroll scroll;
+}
+
+#modal div.modal-content #date_of_note{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#modal div.modal-content #note-title{
+    text-align: center;
+    text-decoration: underline;
+    font-size:xx-large;
+}
+#modal div.modal-content #close_btn{
+    margin-top: 15%;
+}
+
+
+
+/* #modal div.modal-content #modal_note{
+    width: 300px;
+    height: 150px;
+    border:none;
+    margin: 10px;
+    border-radius: 10px;
+} */
+/* this style blurs out the main content i.e the tabler */
+/* .main_content{
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(255, 255, 255, .8);
+    z-index: 999;
+} */

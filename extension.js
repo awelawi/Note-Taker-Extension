@@ -1,3 +1,14 @@
+var chrome = window.chrome;
+var current_tab = document.getElementById("current_tab") 
+chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+    // this retrieves the tab_name
+    const tab_name = tabs[0];
+    // this retrieves the tab_name url
+    const tab_name_url = tab_name.url
+    document.getElementById("tab_name_link").href = tab_name_url;
+
+})
+
 // Line 2-10 defines all the elements that are manipulated by the javascript
 var colorParent = document.querySelector(".color");
 var titleText = document.querySelector("#title_of_page")
@@ -6,12 +17,11 @@ var yellowButton = colorParent.querySelector("#yellow");
 var greenButton = colorParent.querySelector("#green");
 var title_of_note = document.querySelector("#title_of_note")
 var notes_content = document.querySelector("#freeform")
-var tabName = document.title;
 const date = new Date();
 myNotes = []
 var notes_table = document.querySelector('table');
 var saveButton = colorParent.querySelector("#save")
-var deleteButton = colorParent.querySelector("#delete")
+// var deleteButton = colorParent.querySelector("#delete")
 var modal_box = document.querySelector(".modal")
 var modal_close = modal_box.querySelector("#close_btn")
 var modal_note = modal_box.querySelector("#note-content")
@@ -63,31 +73,24 @@ function onSaveButtonClicked(){
 
     notes_dict.title = title_of_note.value
     notes_dict.notes = notes_content.value
-    // console.log(notes_dict)
     addtoStorage()
 }
 
 // addToStorage saves the new note to the localStorage
 function addtoStorage(){
     const NotesInfo = {
-        tabNameCell: tabName,
+        tabNameCell: current_tab,
         titleCell: notes_dict.title,
         notesCell: notes_dict.notes,
         dateCell: date.toDateString()
     }
     myNotes.push(NotesInfo)
     window.localStorage.setItem("myNotes", JSON.stringify(myNotes))
-    // console.log(notes_dict)
     title_of_note.value = "";
     notes_content.value = "";
+    render(myNotes)
 }
 
-// deleteButton should clear out the table, it doesn't work yet
-deleteButton.addEventListener("dblclick", function () {
-    localStorage.clear()
-    myLeads = []
-    render(myLeads)
-})
 // obtains the notes from the local storage
 const notesFromLocalStorage = JSON.parse(window.localStorage.getItem("myNotes"))
 if (notesFromLocalStorage) {
@@ -95,12 +98,12 @@ if (notesFromLocalStorage) {
 
     render(myNotes)
 }
+
 // render should add notes  to the table
 function render (notes) {
+    notes_table.innerHTML = ""; // Clear existing rows
     for(let i = 0; i < notes.length; i++){
         var notes_object = notes[i]
-        // console.log(notes_dict)
-        // Assuming "table" is a reference to the <table> element
         var newRow = document.createElement("tr");
         // assigning an id to the row
         newRow.setAttribute("data-id", i)
@@ -126,10 +129,10 @@ function render (notes) {
 
         // Sets the values of the table cell
         tabNameCell.textContent = notes_object.tabNameCell;
+        console.log(tabNameCell)
         titleCell.textContent = notes_object.titleCell;
         // Only show the first 50 characters of the notes text
         noteCell.textContent = notes_object.notesCell.substring(0, 100) + "...";
-        // console.log(notes_dict) 
         noteCell.setAttribute("data-fullnotes", notes_dict.notes); // Set the full notes text as a data attribute
         dateCell.textContent = notes_object.dateCell;
         newRow.appendChild(tabNameCell);
@@ -140,6 +143,10 @@ function render (notes) {
         // Append the new row to the table
         notes_table.appendChild(newRow);
     }
+    // window.location = window.location
+    // window.location.reload();
+
+
 }
 
 // this method adds an event listener to the notes_table
@@ -149,14 +156,9 @@ notes_table.addEventListener("click", function(event){
     if (row){
         const noteId = row.getAttribute("data-id"); // Get the unique identifier
         var note = getNotesContent(noteId)
-        // console.log(note)
         document.getElementById('modal').style.display = 'block';
-        // console.log(modal_note)
-        // console.log(row.cells[2].getAttribute("data-fullnotes"))
         console.log(note.notesCell)
         modal_note.innerText = note.notesCell
-
-        // console.log(modal_note)
         modal_title.innerText = note.titleCell
         modal_date.innerText = note.dateCell
 

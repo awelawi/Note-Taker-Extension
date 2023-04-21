@@ -1,13 +1,14 @@
-var chrome = window.chrome;
 var current_tab = document.getElementById("current_tab") 
-chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-    // this retrieves the tab_name
-    const tab_name = tabs[0];
-    // this retrieves the tab_name url
-    const tab_name_url = tab_name.url
-    document.getElementById("tab_name_link").href = tab_name_url;
+// this listens for a message from the service worker
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.tabName) {
+        // Use the tab name however you need to
+        console.log('The tab name is: ' + message.tabName);
+        console.log(sendResponse)
+        console.log(sender)
+    }
+});
 
-})
 
 // Line 2-10 defines all the elements that are manipulated by the javascript
 var colorParent = document.querySelector(".color");

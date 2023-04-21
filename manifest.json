@@ -5,7 +5,8 @@
     "permissions": [
         "storage",
         "windows",
-        "tabs"
+        "tabs",
+        "chrome.runtime"
 
     ],
     "description": "Take Online Notes that are saved with Notes Taker Chrome Extension",
@@ -15,9 +16,13 @@
             "css":["style.css"],
             "js": [
                 "extension.js"
-            ]
+            ],
+            "run_at": "document_end"
         }
     ],
+    "background":{
+        "service_worker": "background.js"
+    },
     "icons":{
         "16":"notes_img.png",
         "32": "notes_img.png",
